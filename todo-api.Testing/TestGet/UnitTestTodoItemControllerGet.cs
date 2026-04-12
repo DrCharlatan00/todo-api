@@ -9,7 +9,7 @@ namespace todo_api.Testing.TestGet
     public class UnitTestTodoItemControllerGet
     {
         [Fact]
-        public void TestTodoItemController()
+        public async Task TestTodoItemController()
         {
             var mock = new Mock<ITodoService>();
 
@@ -21,7 +21,7 @@ namespace todo_api.Testing.TestGet
             var controller = new TodoItemController(mock.Object);
 
 
-            var result = controller.GetAllTodo();
+            var result =  await controller.GetAllTodo();
 
             //Assert.IsType<TodoItemController>(result);
             var ok = Assert.IsType<OkObjectResult>(result);
