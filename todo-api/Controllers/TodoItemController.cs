@@ -32,7 +32,7 @@ namespace todo_api.Controllers
             catch {
                 return BadRequest();
             }
-            return Ok();
+            return Ok(item);
         }
         public async Task<IActionResult> SearchById(int idProd) {
             var data = await _service.GetAll();

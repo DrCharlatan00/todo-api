@@ -11,16 +11,20 @@ namespace todo_api.Testing.TestGet
         [Fact]
         public async Task TestTodoItemController()
         {
+            #region Assert
             var mock = new Mock<ITodoService>();
 
             mock.Setup(s => s.GetAll())
                 .ReturnsAsync(new List<TodoItem> { new TodoItem { ID = 1, IsDone = false ,Title = "Testing" } }
 
                 );
+            #endregion
 
+            #region Act
             var controller = new TodoItemController(mock.Object);
+            #endregion
 
-
+            #region Assert
             var result =  await controller.GetAllTodo();
 
             //Assert.IsType<TodoItemController>(result);
@@ -28,7 +32,7 @@ namespace todo_api.Testing.TestGet
             var items = Assert.IsAssignableFrom<IEnumerable<TodoItem>>(ok.Value);
 
             Assert.Single(items);
-
+            #endregion
         }
     }
 }
