@@ -10,7 +10,7 @@ namespace todo_api.Controllers
     {
         public List<TodoItem> items = new();
         [HttpGet]
-        public async Task<IActionResult> Get() {
+        public async Task<IActionResult> GetAllTodo() {
             return  Ok(items);
         }
         public async Task<IActionResult> SearchById(int idProd) {
