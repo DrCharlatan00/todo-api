@@ -9,7 +9,7 @@ namespace todo_api.Testing;
 public class UnitTestTodoItemPost
 {
     [Fact]
-    public void TestCreatePost() {
+    public async Task TestCreatePost() {
         var mock = new Mock<ITodoService>();
 
         var newItem = new TodoItem
@@ -23,7 +23,7 @@ public class UnitTestTodoItemPost
             .ReturnsAsync(newItem);
 
         var controller = new TodoItemController(mock.Object);
-        var result = controller.CreateTodo(newItem);
+        var result = await controller.CreateTodo(newItem);
 
         var ok = Assert.IsType<OkObjectResult>(result);
         Assert.Equal(newItem, ok.Value);
