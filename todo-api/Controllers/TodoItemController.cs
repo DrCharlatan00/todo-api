@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.FileProviders;
 using todo_api.Interfaces;
 using todo_api.Models;
 
@@ -24,6 +25,7 @@ namespace todo_api.Controllers
             return  Ok(await _service.GetAll());
         }
 
+        [HttpPost]
         public async Task<IActionResult> CreateTodo(TodoItem item) {
             try
             {
@@ -34,6 +36,17 @@ namespace todo_api.Controllers
             }
             return Ok(item);
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateTodo(int id, TodoItem item) {
+            var updated = await _service.Update(id, item);
+            if (updated is null) {
+                return NotFound();
+            }
+            return Ok(updated);
+        }
+
+        
         public async Task<IActionResult> SearchById(int idProd) {
             var data = await _service.GetAll();
             var item = data.Where(p => p.ID == idProd).FirstOrDefault();

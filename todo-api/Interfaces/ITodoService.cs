@@ -5,6 +5,7 @@ namespace todo_api.Interfaces
 {
     public interface ITodoService
     {
+        public Task<TodoItem> Update(int id,TodoItem item);
         public Task<List<TodoItem>> GetAll();
         public Task<TodoItem> Create(TodoItem item);
         public Task<TodoItem> SearchById(int id);
